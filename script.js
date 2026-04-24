@@ -7,11 +7,27 @@ async function generateResume() {
   let field = document.getElementById("field").value;
 
   let prompt = `
-Create a professional resume:
+Create a clean, professional resume in this EXACT format:
+
 Name: ${name}
-Education: ${education}
-Skills: ${skills}
-Experience: ${experience}
+
+Professional Summary:
+(Write 2-3 lines)
+
+Skills:
+- Skill 1
+- Skill 2
+- Skill 3
+
+Experience:
+- Role at Company
+  - Responsibility 1
+  - Responsibility 2
+
+Education:
+- Degree, College
+
+Keep formatting clean, use bullet points, no extra symbols.
 `;
 
   try {
