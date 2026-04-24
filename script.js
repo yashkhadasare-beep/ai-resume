@@ -1,10 +1,12 @@
 async function generateResume() {
-function formatResume(text) {
-  return text
-    .replace(/\n/g, "<br>")
-    .replace(/- /g, "• ");
-}  
-  
+
+  // Helper to format text nicely
+  function formatResume(text) {
+    return text
+      .replace(/\n/g, "<br>")
+      .replace(/- /g, "• ");
+  }
+
   let name = document.getElementById("name").value;
   let education = document.getElementById("education").value;
   let skills = document.getElementById("skills").value;
@@ -20,33 +22,26 @@ Professional Summary:
 (Write 2-3 lines)
 
 Skills:
-- Skill 1
-- Skill 2
-- Skill 3
+- ${skills}
 
 Experience:
-- Role at Company
-  - Responsibility 1
-  - Responsibility 2
+- ${experience}
 
 Education:
-- Degree, College
+- ${education}
 
 Keep formatting clean, use bullet points, no extra symbols.
 `;
 
   try {
-    let response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+    // ✅ CALL YOUR BACKEND (NOT OPENROUTER)
+    let response = await fetch("http://localhost:3000/generate", {
       method: "POST",
       headers: {
-        "Authorization": "Bearer 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",
-        "Content-Type": "application/json",
-        "HTTP-Referer": "https://yashkhadasare-beep.github.io",
-        "X-Title": "Resume Builder"
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model: "meta-llama/llama-3-8b-instruct",
-        messages: [{ role: "user", content: prompt }]
+        prompt: prompt
       })
     });
 
@@ -61,7 +56,7 @@ Keep formatting clean, use bullet points, no extra symbols.
     let resume = data.choices[0].message.content;
     document.getElementById("resumeOutput").innerHTML = formatResume(resume);
 
-    // Interview Questions
+    // 🔁 Interview Questions
     let interviewPrompt = `
 Based on this resume:
 ${resume}
@@ -69,17 +64,13 @@ ${resume}
 Generate 10 interview questions for ${field}
 `;
 
-    let response2 = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+    let response2 = await fetch("http://localhost:3000/generate", {
       method: "POST",
       headers: {
-        "Authorization": "Bearer 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",
-        "Content-Type": "application/json",
-        "HTTP-Referer": "https://yashkhadasare-beep.github.io",
-        "X-Title": "Resume Builder"
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model: "meta-llama/llama-3-8b-instruct",
-        messages: [{ role: "user", content: interviewPrompt }]
+        prompt: interviewPrompt
       })
     });
 
