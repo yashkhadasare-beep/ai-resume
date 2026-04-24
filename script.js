@@ -14,45 +14,67 @@ Skills: ${skills}
 Experience: ${experience}
 `;
 
-  let response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Authorization": "Bearer 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",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      model: "mistralai/mistral-7b-instruct",
-      messages: [{ role: "user", content: prompt }],
-    })
-  });
+  try {
+    let response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Authorization": "Bearer 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",
+        "Content-Type": "application/json",
+        "HTTP-Referer": "https://yashkhadasare-beep.github.io",
+        "X-Title": "Resume Builder"
+      },
+      body: JSON.stringify({
+        model: "mistralai/mistral-7b-instruct",
+        messages: [{ role: "user", content: prompt }]
+      })
+    });
 
-  let data = await response.json();
-  let resume = data.choices[0].message.content;
+    let data = await response.json();
+    console.log("Resume API:", data);
 
-  document.getElementById("resumeOutput").innerText = resume;
+    if (!data.choices) {
+      alert("Resume generation failed");
+      return;
+    }
 
-  // Interview Questions
-  let interviewPrompt = `
+    let resume = data.choices[0].message.content;
+    document.getElementById("resumeOutput").innerText = resume;
+
+    // Interview Questions
+    let interviewPrompt = `
 Based on this resume:
 ${resume}
 
 Generate 10 interview questions for ${field}
 `;
 
-  let response2 = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      "Authorization": "Bearer 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",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      model: "mistralai/mistral-7b-instruct",
-      messages: [{ role: "user", content: interviewPrompt }]
-    })
-  });
+    let response2 = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Authorization": "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",
+        "Content-Type": "application/json",
+        "HTTP-Referer": "https://yashkhadasare-beep.github.io",
+        "X-Title": "Resume Builder"
+      },
+      body: JSON.stringify({
+        model: "mistralai/mistral-7b-instruct",
+        messages: [{ role: "user", content: interviewPrompt }]
+      })
+    });
 
-  let data2 = await response2.json();
-  let questions = data2.choices[0].message.content;
+    let data2 = await response2.json();
+    console.log("Interview API:", data2);
 
-  document.getElementById("interviewOutput").innerText = questions;
+    if (!data2.choices) {
+      alert("Interview question generation failed");
+      return;
+    }
+
+    let questions = data2.choices[0].message.content;
+    document.getElementById("interviewOutput").innerText = questions;
+
+  } catch (error) {
+    console.error("Error:", error);
+    alert("Something went wrong. Check console.");
+  }
 }
