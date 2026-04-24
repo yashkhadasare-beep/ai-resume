@@ -17,7 +17,7 @@ Experience: ${experience}
   let response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
     method: "POST",
     headers: {
-      "Authorization": "Bearer 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",
+      "Authorization": "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",
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
@@ -42,7 +42,7 @@ Generate 10 interview questions for ${field}
   let response2 = await fetch("https://openrouter.ai/api/v1/chat/completions", {
     method: "POST",
     headers: {
-      "Authorization": "Bearer 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",
+      "Authorization": "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",
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
