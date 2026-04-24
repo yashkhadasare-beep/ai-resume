@@ -22,7 +22,7 @@ Experience: ${experience}
     },
     body: JSON.stringify({
       model: "mistralai/mistral-7b-instruct",
-      messages: [{ role: "user", content: prompt }]
+      messages: [{ role: "user", content: prompt }],
     })
   });
 
