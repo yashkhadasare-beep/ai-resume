@@ -92,7 +92,7 @@ Generate 10 interview questions for ${field}
     }
 
     let questions = data2.choices[0].message.content;
-    document.getElementById("interviewOutput").innerText = questions;
+    document.getElementById("interviewOutput").innerHTML = formatResume(questions);
 
   } catch (error) {
     console.error("Error:", error);
