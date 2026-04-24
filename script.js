@@ -24,7 +24,7 @@ Experience: ${experience}
         "X-Title": "Resume Builder"
       },
       body: JSON.stringify({
-        model: "mistralai/mistral-7b-instruct",
+        model: "openchat/openchat-7b",
         messages: [{ role: "user", content: prompt }]
       })
     });
