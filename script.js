@@ -51,7 +51,7 @@ Generate 10 interview questions for ${field}
     let response2 = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
       headers: {
-        "Authorization": "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",
+        "Authorization": "Bearer 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",
         "Content-Type": "application/json",
         "HTTP-Referer": "https://yashkhadasare-beep.github.io",
         "X-Title": "Resume Builder"
