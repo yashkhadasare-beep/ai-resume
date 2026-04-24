@@ -59,7 +59,7 @@ Keep formatting clean, use bullet points, no extra symbols.
     }
 
     let resume = data.choices[0].message.content;
-    document.getElementById("resumeOutput").innerText = resume;
+    document.getElementById("resumeOutput").innerHTML = formatResume(resume);
 
     // Interview Questions
     let interviewPrompt = `
