@@ -17,9 +17,11 @@ Experience: ${experience}
   let response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
     method: "POST",
     headers: {
-      "Authorization": "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",
-      "Content-Type": "application/json"
-    },
+  "Authorization": "Bearer sk-or-v1-xxxxxxxx",
+  "Content-Type": "application/json",
+  "HTTP-Referer": "https://yashkhadasare-beep.github.io",
+  "X-Title": "Resume Builder"
+}
     body: JSON.stringify({
       model: "mistralai/mistral-7b-instruct",
       messages: [{ role: "user", content: prompt }]
