@@ -1,5 +1,10 @@
 async function generateResume() {
-
+function formatResume(text) {
+  return text
+    .replace(/\n/g, "<br>")
+    .replace(/- /g, "• ");
+}  
+  
   let name = document.getElementById("name").value;
   let education = document.getElementById("education").value;
   let skills = document.getElementById("skills").value;
