@@ -24,7 +24,7 @@ Experience: ${experience}
         "X-Title": "Resume Builder"
       },
       body: JSON.stringify({
-        model: "openchat/openchat-7b",
+        model: "meta-llama/llama-3-8b-instruct",
         messages: [{ role: "user", content: prompt }]
       })
     });
@@ -57,7 +57,7 @@ Generate 10 interview questions for ${field}
         "X-Title": "Resume Builder"
       },
       body: JSON.stringify({
-        model: "openchat/openchat-7b",
+        model: "meta-llama/llama-3-8b-instruct",
         messages: [{ role: "user", content: interviewPrompt }]
       })
     });
