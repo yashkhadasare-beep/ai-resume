@@ -1,6 +1,5 @@
 async function generateResume() {
 
-  // Helper to format text nicely
   function formatResume(text) {
     return text
       .replace(/\n/g, "<br>")
@@ -34,15 +33,13 @@ Keep formatting clean, use bullet points, no extra symbols.
 `;
 
   try {
-    // ✅ CALL YOUR BACKEND (NOT OPENROUTER)
-    let response = await fetch("http://localhost:3000/generate", {
+    // ✅ USE LIVE BACKEND
+    let response = await fetch("https://ai-resume-backnd-production.up.railway.app/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        prompt: prompt
-      })
+      body: JSON.stringify({ prompt })
     });
 
     let data = await response.json();
@@ -56,7 +53,6 @@ Keep formatting clean, use bullet points, no extra symbols.
     let resume = data.choices[0].message.content;
     document.getElementById("resumeOutput").innerHTML = formatResume(resume);
 
-    // 🔁 Interview Questions
     let interviewPrompt = `
 Based on this resume:
 ${resume}
@@ -64,14 +60,12 @@ ${resume}
 Generate 10 interview questions for ${field}
 `;
 
-    let response2 = await fetch("http://localhost:3000/generate", {
+    let response2 = await fetch("https://ai-resume-backnd-production.up.railway.app/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        prompt: interviewPrompt
-      })
+      body: JSON.stringify({ prompt: interviewPrompt })
     });
 
     let data2 = await response2.json();
