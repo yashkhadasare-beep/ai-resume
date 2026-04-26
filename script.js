@@ -33,8 +33,8 @@ Keep formatting clean, use bullet points, no extra symbols.
 `;
 
   try {
-    // ✅ USE LIVE BACKEND
-    let response = await fetch("https://ai-resume-backnd-production.up.railway.app/generate", {
+    // ✅ CALL VERCEL API
+    let response = await fetch("/api/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -53,6 +53,7 @@ Keep formatting clean, use bullet points, no extra symbols.
     let resume = data.choices[0].message.content;
     document.getElementById("resumeOutput").innerHTML = formatResume(resume);
 
+    // 🔁 Interview Questions
     let interviewPrompt = `
 Based on this resume:
 ${resume}
@@ -60,7 +61,7 @@ ${resume}
 Generate 10 interview questions for ${field}
 `;
 
-    let response2 = await fetch("https://ai-resume-backnd-production.up.railway.app/generate", {
+    let response2 = await fetch("/api/generate", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
